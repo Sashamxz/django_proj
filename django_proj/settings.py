@@ -10,20 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
-import sys
+from dotenv import load_dotenv
 
 
-
-
-
-def env_to_bool(env, default):
-    str_val = os.environ.get(env)
-    return default if str_val is None else str_val == 'True'
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+load_dotenv()
+BASE_DIR= os.path.join(os.path.dirname(__file__))
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
 
 
 
@@ -32,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
+SECRET_KEY =  os.getenv(
     'DJANGO_SECRET_KEY') or 'n9ceqv38)#&mwuat@(mjb_peeem,b nem$e8$qyr#fw9ot!=ba6lijx-6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -89,11 +86,13 @@ WSGI_APPLICATION = 'django_proj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':  os.getenv('DB_NAME'),
+        'USER':  os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST':  os.getenv('DB_HOST')
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
