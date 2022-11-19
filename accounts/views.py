@@ -1,9 +1,14 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-
-
+from rest_framework import generics
+from .models import Account
+from .serializers import AccountSerializer
+from rest_framework.permissions import IsAdminUser
 
 # Create your views here.
 
-def index(request):
-    return HttpResponse('Hi')
+
+
+
+class AccountListAPIView(generics.ListCreateAPIView):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
