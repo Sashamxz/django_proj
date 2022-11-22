@@ -15,6 +15,8 @@ from .models import *
 from .forms import OrderForm, CreateUserForm, CustomerForm
 from .filters import OrderFilter
 
+
+
 @unauthenticated_user
 def registerPage(request):
     
@@ -30,6 +32,8 @@ def registerPage(request):
 
     context = {'form':form}
     return render(request, 'accounts/register.html', context)
+
+
 @unauthenticated_user
 def loginPage(request):
     
@@ -69,6 +73,7 @@ def home(request):
     context = {'orders':orders, 'customers':customers,'total_orders':total_orders,'delivered':delivered,'pending':pending}
     return render(request, 'accounts/dashboard.html', context)
 
+
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['customer'])
 def userPage(request):
@@ -103,6 +108,7 @@ def accountSettings(request):
 def products(request):
     products =Product.objects.all()
     return render(request, 'accounts/products.html', {'products':products})
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
@@ -147,6 +153,9 @@ def updateOrder(request,pk):
             return redirect('/')
     context = {'form':form}
     return render(request, 'accounts/order_form.html', context)
+
+
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
