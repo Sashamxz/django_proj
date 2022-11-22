@@ -1,73 +1,159 @@
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-from rest_framework import status
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.forms import inlineformset_factory
+from django.contrib.auth.forms import UserCreationForm
 
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Customer
-from .serializes import *
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+from .decorators import unauthenticated_user, allowed_users, admin_only
+from django.contrib.auth.models import Group
 
+# Create your views here.
+from .models import *
+from .forms import OrderForm, CreateUserForm, CustomerForm
+from .filters import OrderFilter
 
-@api_view(['GET', 'POST'])
-def customers_list(request):
-    """
- List  customers, or create a new customer.
- """
-    if request.method == 'GET':
-        data = []
-        nextPage = 1
-        previousPage = 1
-        customers = Customer.objects.all()
-        page = request.GET.get('page', 1)
-        paginator = Paginator(customers, 10)
-        try:
-            data = paginator.page(page)
-        except PageNotAnInteger:
-            data = paginator.page(1)
-        except EmptyPage:
-            data = paginator.page(paginator.num_pages)
-
-        serializer = CustomerSerializer(data,context={'request': request} ,many=True)
-        if data.has_next():
-            nextPage = data.next_page_number()
-        if data.has_previous():
-            previousPage = data.previous_page_number()
-
-        return Response({'data': serializer.data , 'count': paginator.count, 'numpages' : paginator.num_pages, 'nextlink': '/api/customers/?page=' + str(nextPage), 'prevlink': '/api/customers/?page=' + str(previousPage)})
-
-    elif request.method == 'POST':
-        serializer = CustomerSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def customers_detail(request, pk):
-    """
-    customer detail with primary key
-    """
+@unauthenticated_user
+def registerPage(request):
     
-    try:
-        customer = Customer.objects.get(pk=pk)
+    form = CreateUserForm ()
+    if request.method == 'POST': 
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+
+            messages.success(request, 'Account was created for ' + username)
+            return redirect('login')  
+
+    context = {'form':form}
+    return render(request, 'accounts/register.html', context)
+@unauthenticated_user
+def loginPage(request):
     
-    except Customer.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-    if request.method == 'GET':
-        serializer = CustomerSerializer(customer,context={'request': request})
-        return Response(serializer.data)
+        user = authenticate(request, username=username, password=password)
 
-    elif request.method == 'PUT':
-        serializer = CustomerSerializer(customer, data=request.data,context={'request': request})
-        
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.info(request, 'Username or Password is incorrect')
+    context = {}
+    return render(request, 'accounts/login.html', context)
 
-    elif request.method == 'DELETE':
-        customer.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+
+@login_required(login_url='login')
+@admin_only
+def home(request):
+    orders = Order.objects.all()
+    customers = Customer.objects.all()
+
+    total_customers = customers.count()
+    total_orders = orders.count()
+    delivered = orders.filter(status='Delivered').count()
+    pending = orders.filter(status='Pending').count()
+
+    context = {'orders':orders, 'customers':customers,'total_orders':total_orders,'delivered':delivered,'pending':pending}
+    return render(request, 'accounts/dashboard.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def userPage(request):
+    orders = request.user.customer.order_set.all()
+    total_orders = orders.count()
+    delivered = orders.filter(status='Delivered').count()
+    pending = orders.filter(status='Pending').count()
+    print('ORDERS:', orders)
+
+    context={'orders':orders,'total_orders':total_orders,'delivered':delivered,'pending':pending}
+    return render(request, 'accounts/user.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def accountSettings(request):
+	customer = request.user.customer
+	form = CustomerForm(instance=customer)
+
+	if request.method == 'POST':
+		form = CustomerForm(request.POST, request.FILES,instance=customer)
+		if form.is_valid():
+			form.save()
+
+
+	context = {'form':form}
+	return render(request, 'accounts/account_settings.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def products(request):
+    products =Product.objects.all()
+    return render(request, 'accounts/products.html', {'products':products})
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def customers(request, pk_test):
+    customer = Customer.objects.get(id=pk_test)
+    orders = customer.order_set.all() 
+    order_count = orders.count()
+
+    myFilter = OrderFilter(request.GET, queryset=orders)
+    orders = myFilter.qs
+    context = {'customer':customer, 'orders':orders, 'order_count':order_count,
+    'myFilter':myFilter}
+    return render(request, 'accounts/customers.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def createOrder(request,pk):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product','status'), extra=10 )
+    customer = Customer.objects.get(id=pk)
+    formset = OrderFormSet(queryset=Order.objects.none(),instance=customer)
+    #form = OrderForm(initial={'customer':customer})
+    if request.method == 'POST':
+        #print('Printing POST:', request.POST)
+        #form = OrderForm(request.POST)
+        formset = OrderFormSet(request.POST, instance=customer)
+        if formset.is_valid():
+            formset.save()
+            return redirect('/')
+    context = {'formset':formset}
+    return render(request, 'accounts/order_form.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def updateOrder(request,pk):
+    order = Order.objects.get(id=pk)
+    form = OrderForm(instance=order)
+
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form':form}
+    return render(request, 'accounts/order_form.html', context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def deleteOrder(request,pk):
+    order = Order.objects.get(id=pk)
+    if request.method == "POST":
+        order.delete()
+        return redirect('/')
+    context = {'item':order}
+    return render(request, 'accounts/delete.html', context)

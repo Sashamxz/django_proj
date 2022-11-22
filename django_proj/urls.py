@@ -15,13 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
 from customers import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', include('accounts.urls')),
-    path('', include('frontend.urls')),
-    url(r'^api/customers/$', views.customers_list),
-	url(r'^api/customers/(?P<pk>[0-9]+)$', views.customers_detail),
+ 
 ]
