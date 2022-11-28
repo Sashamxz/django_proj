@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'crm',
     'rest_framework',
     'rest_framework.authtoken',
-    'frontend.apps.FrontendConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,7 +76,9 @@ CORS_ORIGIN_WHITELIST = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'frontend/build')
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
