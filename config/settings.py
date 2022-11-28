@@ -41,8 +41,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'customers',
+    'crm',
     'rest_framework',
+    'rest_framework.authtoken',
     'frontend.apps.FrontendConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -63,7 +64,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'django_proj.urls'
+ROOT_URLCONF = 'config.urls'
 
 CORS_ORIGIN_ALLOW_ALL = False
 
@@ -89,7 +90,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'django_proj.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
@@ -135,6 +136,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+#react_dir
+REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

@@ -1,12 +1,13 @@
 from django.urls import path
 from rest_framework import routers
 from django.conf.urls import include
-from .views import ProductViewSet, UserViewSet
+from .views import ProductViewSet, UserViewSet, CustomerViewSet
 
 
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
 router.register('product', ProductViewSet)
+router.register('customers', CustomerViewSet)
 
 
 

@@ -12,14 +12,14 @@ from .models import Customer
 class CustomerForm(ModelForm):
 	class Meta:
 		model = Customer
-		fields = '__all__'
+		fields = ['name', 'email']
 		exclude = ['user']
 
 
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['customer', 'product', 'status']
 
 
 class CreateUserForm(UserCreationForm):

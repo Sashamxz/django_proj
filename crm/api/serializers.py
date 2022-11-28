@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from crm.models import Order, Product
+from crm.models import Order, Product, Customer
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
@@ -21,10 +21,18 @@ class UserSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ('_all_')
+        fields = ['customer', 'product', 'status']
 
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('_all_')
+        fields = ['name', 'price','category', 'description']
+
+
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = ('pk', 'name','phone',  'email', 'description')

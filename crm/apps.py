@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AccountsConfig(AppConfig):
-    name = 'customers'
+class CrmConfig(AppConfig):
+    name = 'crm'
 
