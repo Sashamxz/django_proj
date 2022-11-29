@@ -42,6 +42,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'crm',
+    'frontend',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.admin',
@@ -51,6 +52,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'frontend/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
+    }
+}
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -76,9 +86,7 @@ CORS_ORIGIN_WHITELIST = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'frontend/build')
-            ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
