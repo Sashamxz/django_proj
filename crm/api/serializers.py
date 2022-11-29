@@ -18,10 +18,12 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
+
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['customer', 'product', 'status']
+
 
 
 class ProductSerializer(serializers.ModelSerializer):

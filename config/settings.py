@@ -41,8 +41,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'crm',
     'frontend',
+    'crm',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.admin',
@@ -54,12 +54,12 @@ INSTALLED_APPS = [
 ]
 
 
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'frontend/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
-    }
-}
+# WEBPACK_LOADER = {
+#     'DEFAULT': {
+#         'BUNDLE_DIR_NAME': 'frontend/',
+#         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
+#     }
+# }
 
 
 MIDDLEWARE = [

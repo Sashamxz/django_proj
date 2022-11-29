@@ -5,6 +5,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 
 
-urlpatterns = [
-  path('', include('crm.index'))
-]
+# urlpatterns = [
+#   path('', include('crm.index'))
+# ]
