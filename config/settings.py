@@ -41,8 +41,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'frontend',
-    'crm',
+    'frontend.apps.FrontendConfig',
+    'crm.apps.CrmConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.admin',
