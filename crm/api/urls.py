@@ -6,7 +6,7 @@ from .views import ProductViewSet, UserViewSet, CustomerViewSet
 
 router = routers.DefaultRouter()
 router.register('users', UserViewSet)
-router.register('product', ProductViewSet)
+router.register('products', ProductViewSet)
 router.register('customers', CustomerViewSet)
 
 
