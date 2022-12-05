@@ -33,7 +33,7 @@ class Product(models.Model):
         ('Indoor', 'Indoor'),
         ('Out Door', 'Out Door'),
     )
-    id = models.FloatField(primary_key=True, auto_created=True)
+    
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField(null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
@@ -43,6 +43,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 class Order(models.Model):

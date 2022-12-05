@@ -22,6 +22,7 @@ class OrderForm(ModelForm):
         fields = ['customer', 'product', 'status']
 
 
+
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User

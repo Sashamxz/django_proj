@@ -17,17 +17,17 @@ export const getProduct = () => (dispatch, getState) => {
   
 //   // DELETE Product
   
-//   export const deleteProduct = (id) => (dispatch, getState) => {
-//     Axios.delete(`/api/products/${id}/`, tokenConfig(getState))
-//       .then((res) => {
-//         dispatch(createMessage({ deleteLead: "Product Deleted" }));
-//         dispatch({
-//           type: DELETE_LEAD,
-//           payload: id,
-//         });
-//       })
-//       .catch((err) => console.log(err));
-//   };
+  export const deleteProduct = (id) => (dispatch, getState) => {
+    Axios.delete(`/api/products/${id}/`, tokenConfig(getState))
+      .then((res) => {
+        dispatch(createMessage({ deleteLead: "Product Deleted" }));
+        dispatch({
+          type: DELETE_LEAD,
+          payload: id,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
   
 //   // ADD Product
   

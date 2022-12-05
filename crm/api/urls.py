@@ -1,16 +1,16 @@
 from django.urls import path
 from rest_framework import routers
 from django.conf.urls import include
-from .views import ProductViewSet, UserViewSet, CustomerViewSet
+from .views import ProductView, UserView, CustomerView
+from . import views
 
 
-router = routers.DefaultRouter()
-router.register('users', UserViewSet)
-router.register('products', ProductViewSet)
-router.register('customers', CustomerViewSet)
 
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', views.getRoutes),
+    path('users/', UserView.as_view(), name='users'),
+    path('products/', ProductView.as_view(), name='products'),
+    path('customers/', CustomerView.as_view(), name='customers')
 ]
