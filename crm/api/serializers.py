@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 
 
 
+
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -24,7 +27,10 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = ['customer', 'product', 'status']
 
-
+    def create(self, validated_data):
+        order = Order.objects.create_orfer(**validated_data)
+        Token.objects.create(order=order)
+        return order
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:

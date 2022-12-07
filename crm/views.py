@@ -1,20 +1,28 @@
-# import os
-# from django.contrib.auth.models import User, Group
-# from django.shortcuts import render
-# from django.http import HttpResponse
-# from config import settings
+
+from django.contrib.auth import login, authenticate
+from rest_framework import  generics, serializers
+from rest_framework.permissions import AllowAny, IsAuthenticated, BasePermission, SAFE_METHODS, IsAdminUser, \
+    DjangoObjectPermissions
+from crm.serializers import  RegisterSerializer
 
 
 
 
-# def index(request):
-#     try:
-#         with open(os.path.join(settings.REACT_APP_DIR, 'build', 'index.html')) as f:
-#             return HttpResponse(f.read())
-#     except FileNotFoundError:
-#         return HttpResponse(
-#             """
-#             Please build the front-end using cd frontend && npm install && npm run build 
-#             """,
-#             status=501,
-#         )
+class RegisterUserView(generics.CreateAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
+
+    def create(self, request, *args, **kwargs):
+        # Ensure that passwords match
+        if request.data.get("password") != request.data.get("confirmation"):
+            raise serializers.ValidationError({
+                "password": "Passwords don't match"
+            })
+        response = super().create(request, *args, **kwargs)
+        user = authenticate(request, username=request.data.get("username"), password=request.data.get("password"))
+        if user is not None:
+            login(request, user)
+            return response
+        raise serializers.ValidationError({
+            "error": "cannot register"
+        })

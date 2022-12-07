@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from rest_framework import status
+from django.contrib.auth import login, authenticate
+from rest_framework import status, generics, serializers
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from django.contrib.auth.models import User
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated, BasePermission, SAFE_METHODS, IsAdminUser, \
+    DjangoObjectPermissions
 from .serializers import ProductSerializer, UserSerializer, CustomerSerializer
 from crm.models import Product, Customer
 
@@ -24,9 +26,32 @@ def getRoutes(request):
 
 
 
+
+
+class LoginUserView(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = UserSerializer
+
+    def post(self, request):
+        user = authenticate(request, username=request.data.get("username"), password=request.data.get("password"))
+        if user is not None:
+            login(request, user)
+            return Response("Successful login")
+        raise serializers.ValidationError({
+            "error": "cannot login"
+        })
+
+
+
+
+
+
+
+
+
 class UserView(APIView):
     serializer_class = UserSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     
     def get(self, request, *args, **kwargs):
         users = User.objects.all()
@@ -40,7 +65,7 @@ class UserView(APIView):
 
 class ProductView(APIView):       
     serializer_class = ProductSerializer         
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     queryset = Product.objects.all()
 
     def get(self, request, *args, **kwargs):
@@ -69,6 +94,13 @@ class ProductView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAdminUser)
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 
 
