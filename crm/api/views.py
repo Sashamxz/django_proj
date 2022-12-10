@@ -65,7 +65,7 @@ class UserView(APIView):
 
 class ProductView(APIView):       
     serializer_class = ProductSerializer         
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     queryset = Product.objects.all()
 
     def get(self, request, *args, **kwargs):

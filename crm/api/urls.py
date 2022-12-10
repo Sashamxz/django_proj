@@ -14,7 +14,6 @@ urlpatterns = [
     path('', views.getRoutes),
     path('auth/', include('djoser.urls')),
     re_path(r'^auth/', include('djoser.urls.authtoken')),
-    
     path('login', views.LoginUserView.as_view(), name="login"),
     path('logout', LogoutView.as_view(), name="logout"),
     path('users/', views.UserView.as_view(), name='users'),

@@ -1,0 +1,82 @@
+
+.Container {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .IconLogo {
+    width: 150px;
+    height: 40px;
+    margin-left: 40px;
+    cursor: pointer;
+  }
+  
+  .GroupButton {
+    width: 210px;
+    height: 40px;
+    /* background-color: white; */
+    margin-right: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .ContainerAvatar {
+    margin-right: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .ContentAvatar {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(205, 46, 113, 1);
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .ContentAvatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+  
+  .DropdownItem {
+    color: white;
+  }
+  
+  .DropdownItem img {
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+  }
+  
+  .ButtonLogin {
+    width: 100px;
+    height: 35px;
+    background-color: black;
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .ButtonRegister {
+    width: 100px;
+    height: 35px;
+    background-color: rgba(205, 46, 113, 1);
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+  }
