@@ -1,0 +1,24 @@
+{% extends 'crm/base.html' %}
+
+{% block content %}
+<ul class="list-articles">
+	{% for p in products %}
+			<li><div class="article-panel">
+	<p class="first">Category: {{p.cat}}</p>
+	<p class="last">Date: {{p.time_update|date:"d-m-Y H:i:s"}}</p>
+</div>
+
+{% if p.photo %}
+	<p><img class="img-article-left thumb" src="{{p.photo.url}}"></p>
+{% endif %}
+
+				<h2>{{p.name}}</h2>
+	{% autoescape on %}
+	{{p.content|linebreaks|truncatewords:50}}
+	{% endautoescape %}
+			<div class="clear"></div>
+			<p class="link-read-post"><a href="{{ p.get_absolute_url }}">product detail</a></p>
+			</li>
+	{% endfor %}
+</ul>
+{% endblock %}

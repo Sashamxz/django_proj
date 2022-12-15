@@ -19,10 +19,9 @@ def getRoutes(request):
     routes = [
         '/api/users/',
         '/api/products/',
-        '/api/token/customers/',
+        '/api/customers/',
     ]
     return Response(routes)
-
 
 
 
@@ -43,13 +42,7 @@ class LoginUserView(APIView):
 
 
 
-
-
-
-
-
-
-class UserView(APIView):
+class UsersListView(APIView):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
     
@@ -63,7 +56,7 @@ class UserView(APIView):
 
 
 
-class ProductView(APIView):       
+class ProductsListView(APIView):       
     serializer_class = ProductSerializer         
     permission_classes = (AllowAny,)
     queryset = Product.objects.all()
@@ -105,7 +98,7 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-class CustomerView(APIView):
+class CustomersListView(APIView):
     serializer_class = CustomerSerializer
     queryset = Customer.objects.all()
 
