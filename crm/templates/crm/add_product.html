@@ -1,0 +1,15 @@
+{% extends 'crm/base.html' %}
+
+<h1>{{title}}</h1>
+
+{% block content %}
+<h1>{{name}}</h1>
+
+<form action="{% url 'add-product' %}" method="post" enctype="multipart/form-data">
+    
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" name="Submit">
+</form>
+
+{% endblock %}

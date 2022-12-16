@@ -4,8 +4,9 @@
 <h1>{{product.name}}</h1>
 
 {% if product.photo %}
-<p><img class="img-article-left" src="{{post.photo.url}}"></p>
+<p><img class="img-article-left" src="{{product.photo.url}}"></p>
 {% endif %}
 
 {{product.content|linebreaks}}
 {% endblock %}
+
