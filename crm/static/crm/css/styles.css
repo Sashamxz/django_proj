@@ -30,6 +30,13 @@ img.img-article-left.thumb {
 	height: auto;
 }
 
+
+.hello-msg{
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px;
+  }
+
 p.link-read-post {
 	text-align: right;
 }

@@ -1,7 +1,7 @@
 from django.urls import path, re_path
 from django.views.decorators.cache import cache_page
-from .views import CrmHome,  LoginUser,  RegisterUser, AddProduct, CustomerDetail, CreateCustomer, \
-              CreateOrder, about, logout_user, customer_list
+from .views import CrmHome,  LoginUser,  RegisterUser, AddProduct, CustomerDetail, AddCustomer, \
+        AddOrder, ShowCustomers, ShowProducts, ProductDetail, ShowOrders, OrderDetail, about, logout_user
 
 
 
@@ -13,13 +13,22 @@ urlpatterns = [
     #common
     path('', CrmHome.as_view(), name='home'),
     path('about/', about, name='about'),
-    #crm     
+    #crm  
+    
+    # product   
     path('add-product/', AddProduct.as_view(), name='add-product'),
-    path('orders/', AddProduct.as_view(), name='orders'),
-    path('customers/', customer_list, name='customers'),
-    path('create-customer/', CreateCustomer.as_view(), name='create-customer') ,
-    path('customer/<str:pk>/', CustomerDetail.as_view(), name='customer'),
-    path('create-order/', CreateOrder.as_view(), name='create-order'),
-    path('update-order/<str:pk>/', about, name="update-order"),
-    path('delete-order/<str:pk>/', about, name="delete-order")
+    path('show-products/', ShowProducts.as_view(), name='show-products'),
+    path('product-detail/<int:pk>/', ProductDetail.as_view(), name='product-detail'),
+    
+    #customer
+    path('customers/', ShowCustomers.as_view(), name='shoe-customers'),
+    path('create-customer/', AddCustomer.as_view(), name='create-customer') ,
+    path('customer/<int:pk>/', CustomerDetail.as_view(), name='customer-detail'),
+    
+    #order
+    path('orders/', ShowOrders.as_view(), name='show-orders'),
+    path('add-order/', AddOrder.as_view(), name='add-order'),
+    path('order//<int:pk>/', OrderDetail.as_view(), name='order-deatil'),
+    path('update-order/<int:pk>/', about, name="update-order"),
+    path('delete-order/<int:pk>/', about, name="delete-order")
 ]

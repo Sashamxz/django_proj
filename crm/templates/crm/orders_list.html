@@ -12,16 +12,19 @@
 				<div class="card card-body">
 					<table class="table">
 						<tr>
+							<th>Customer</th>
 							<th>Product</th>
-							<th>Category</th>
-							<th>Price</th>
+							<th>Date</th>
+							<th>Status</th>
+
 						</tr>
-                        {% for i in products %}
+                        {% for item in orders %}
                             <tr>
-                                <td>{{i.name}}</td>
-								<td>{{i.category}}</td>
-								<td>{{i.price}}</td>
-                            </tr>
+                                <td>{{item.customer}}</td>
+								<td>{{item.product}}</td>
+								<td>{{item.date_created}}</td>
+								<td>{{item.status}}</td>
+							</tr>
                         {% endfor %}
 						
 					</table>

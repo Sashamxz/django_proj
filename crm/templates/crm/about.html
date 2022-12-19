@@ -1,6 +1,12 @@
 {% extends 'women/base.html' %}
 
 {% block content %}
-<h1>About</h1>
+
+{% if request.user.is_authenticated %}
+<h1>Hello {name}</h1>
+{% endif %}
+
+<h2> This is About page!</h2>
+
 
 {% endblock %}

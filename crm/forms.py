@@ -13,18 +13,15 @@ from .models import Customer, Product
 class AddProductForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+    
+    name = forms.CharField(max_length=200, label=('Enter name')),
+    price = forms.CharField(widget=forms.NumberInput),    
+    description = forms.CharField(max_length=200, label=('Description'))       
 
     class Meta:
         model = Product
         fields = ['name', 'price', 'category', 'description']
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-input'}),
-            'price': forms.CharField(widget=forms.NumberInput),  
-            'description': forms.Textarea(attrs={'cols': 60, 'rows': 10})
-        }
-
-
+       
     def clean_title(self):
         name = self.cleaned_data['name']
         if len(name) > 30:
@@ -55,15 +52,24 @@ class LoginUserForm(AuthenticationForm):
 
 
 
-class CustomerForm(ModelForm):
-	class Meta:
-		model = Customer
-		fields = ['name', 'email']
-		exclude = ['user']
+
+
+class AddCustomer(forms.ModelForm):
+	
+    name = forms.CharField(max_length=200, label=('Enter name')),
+    phone = forms.CharField(widget=forms.NumberInput),  
+    email = forms.EmailField( max_length=200, label=('Enter email address')),   
+    description = forms.CharField(max_length=200, label=('Description'))    
+
+    class Meta:
+        model = Customer
+        fields = ['user', 'name' ,'phone', 'email', 'description', 'profile_pic'] 
+       
 
 
 
-class OrderForm(ModelForm):
+
+class AddOrder(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['customer', 'product', 'status']
