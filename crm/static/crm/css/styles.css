@@ -39,6 +39,8 @@ img.img-article-left.thumb {
 
 p.link-read-post {
 	text-align: right;
+
+
 }
 p.link-read-post a {
 	padding: 10px;
@@ -60,6 +62,11 @@ p.link-read-post a {
 	color: #fff;
 	border-radius: 15px;
 	border: 1px solid #000;
+}
+
+div.col-md5 td{
+	padding: 5px;
+	border-collapse: collapse;
 }
 
 
@@ -84,6 +91,7 @@ ul.list-articles {
 	margin: 0;
 	padding: 0;
 }
+
 ul.list-articles li {
 	border-bottom: 1px solid #ccc;
 }

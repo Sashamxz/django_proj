@@ -17,11 +17,11 @@ urlpatterns = [
     
     # product   
     path('add-product/', AddProduct.as_view(), name='add-product'),
-    path('show-products/', ShowProducts.as_view(), name='show-products'),
+    path('products/', ShowProducts.as_view(), name='show-products'),
     path('product-detail/<int:pk>/', ProductDetail.as_view(), name='product-detail'),
     
     #customer
-    path('customers/', ShowCustomers.as_view(), name='shoe-customers'),
+    path('customers/', ShowCustomers.as_view(), name='show-customers'),
     path('add-customer/', AddCustomer.as_view(), name='add-customer') ,
     path('customer/<int:pk>/', CustomerDetail.as_view(), name='customer-detail'),
     

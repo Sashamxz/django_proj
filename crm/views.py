@@ -93,16 +93,15 @@ class AddProduct(DataMixin, CreateView):
 class ShowProducts(DataMixin, DetailView):
     model = Product
     template_name = 'crm/product_list.html'
-    
-    context_object_name = 'product'
+    context_object_name = 'products'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title=context['product'])
+        c_def = self.get_user_context(title=context['products'])
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
-        return Order.objects.all().filter('date_created')
+        return Order.objects.all().order_by('date_created')
 
 
 
