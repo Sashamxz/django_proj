@@ -12,20 +12,22 @@
 	<div class="col-md-5">
 		<h5>CUSTOMERS:</h5>
 		<hr>
-		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href={% url 'create-customer' %}>Create Customer</a>
+		<div class="card-scard-body">
+			<a class="btn btn-primary  btn-sm btn-block" href={% url 'add-customer' %}>Create Customer</a>
 			<table class="table table-sm">
 				<tr>
-					<th></th>
+					
 					<th>Customer</th>
 					<th>Phone</th>
+					<th></th>
 				</tr>
 
 				{% for customer in customers %}
 					<tr>
-						<td><a class="btn btn-info" href={% url 'customer-detail' customer.id %}>View Profile</a></td>
+						
 						<td>{{customer.name}}</td>
 						<td>{{customer.phone}}</td>
+						<td ><a class="btn btn-info" id='btn_deatil_prof' href={% url 'customer-detail' customer.id %}>View Profile</a></td>
 					</tr>
 				{% endfor %}
 				
@@ -38,7 +40,7 @@
 		<h5>LAST 5 ORDERS</h5>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-primary btn-sm btn-block" href={% url 'create-order' %}>Create Order</a>
+			<a class="btn btn-primary btn-sm btn-block" href={% url 'add-order' %}>Create Order</a>
 			<table class="table table-sm">
 				<tr>
 					<th>Product</th>

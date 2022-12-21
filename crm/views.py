@@ -6,7 +6,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from .forms import RegisterUserForm, LoginUserForm, AddProductForm, AddOrder, AddCustomer
+from .forms import RegisterUserForm, LoginUserForm, AddProductForm, AddOrderForm, AddCustomerForm
 from .models import Product, Order, Customer
 from .utils import DataMixin
 from .filters import OrderFilter
@@ -121,16 +121,21 @@ class ProductDetail(DataMixin, DetailView):
 
 class AddOrder(DataMixin,CreateView):
     model = Order
-    form_class = AddOrder
+    form_class = AddOrderForm
     template_name = 'crm/add_order.html' 
+    login_url = reverse_lazy('login')
+    success_url = 'home'
     
-    
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Create order')
-        return dict(list(context.items()) + list(c_def.items()))
 
-    
+
+    def get_initial(self):
+        initial = super(AddOrder, self).get_initial()
+        customer_id = self.kwargs['customer']
+        initial['customer'] = Customer.objects.get(pk=customer_id)
+        return initial
+
+
+
 
 class ShowOrders(DataMixin, DetailView):
     model = Order
@@ -162,8 +167,8 @@ class OrderDetail(DataMixin, DetailView):
 
 
 class AddCustomer(DataMixin, CreateView):
-    template_name = 'crm/customer_form.html'
-    form_class = AddCustomer
+    template_name = 'crm/add_customer.html'
+    form_class = AddCustomerForm
     success_url = reverse_lazy('customers-list')
     
     def get_context_data(self, *, object_list=None, **kwargs):

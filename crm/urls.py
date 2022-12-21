@@ -22,7 +22,7 @@ urlpatterns = [
     
     #customer
     path('customers/', ShowCustomers.as_view(), name='shoe-customers'),
-    path('create-customer/', AddCustomer.as_view(), name='create-customer') ,
+    path('add-customer/', AddCustomer.as_view(), name='add-customer') ,
     path('customer/<int:pk>/', CustomerDetail.as_view(), name='customer-detail'),
     
     #order

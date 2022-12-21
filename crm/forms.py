@@ -22,7 +22,7 @@ class AddProductForm(forms.ModelForm):
         model = Product
         fields = ['name', 'price', 'category', 'description']
        
-    def clean_title(self):
+    def clean_name(self):
         name = self.cleaned_data['name']
         if len(name) > 30:
             raise ValidationError('More than 30 letter')
@@ -54,7 +54,7 @@ class LoginUserForm(AuthenticationForm):
 
 
 
-class AddCustomer(forms.ModelForm):
+class AddCustomerForm(forms.ModelForm):
 	
     name = forms.CharField(max_length=200, label=('Enter name')),
     phone = forms.CharField(widget=forms.NumberInput),  
@@ -69,7 +69,7 @@ class AddCustomer(forms.ModelForm):
 
 
 
-class AddOrder(forms.ModelForm):
+class AddOrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['customer', 'product', 'status']

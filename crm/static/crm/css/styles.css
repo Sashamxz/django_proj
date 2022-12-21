@@ -1,14 +1,14 @@
 html, body {
 	font-family: 'Arial';
 	margin: 0;
-	padding: 0;
+	padding: 5px;
 	height: 100%;
 	width: 100%;
 	color: rgb(215, 212, 212);
 }
 
 a {
-	color: #75889b;
+	color: #2a2f34;
 	text-decoration: none;
 }
 a:hover {
@@ -47,6 +47,21 @@ p.link-read-post a {
 	color: #fff;
 	text-decoration: none;
 }
+
+.card-scard-body {
+	padding: 5px;
+	
+}
+
+
+.card-scard-body #btn_deatil_prof{
+	padding: 1px;
+	background: #878ab5;
+	color: #fff;
+	border-radius: 15px;
+	border: 1px solid #000;
+}
+
 
 div.article-panel {
     background: #eee;
