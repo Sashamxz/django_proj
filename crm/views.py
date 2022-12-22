@@ -75,6 +75,7 @@ def about(request):
 
 
 #crm views
+
 class AddProduct(DataMixin, CreateView):
     form_class = AddProductForm
     template_name = 'crm/add_product.html'
@@ -90,9 +91,9 @@ class AddProduct(DataMixin, CreateView):
 
 
 
-class ShowProducts(DataMixin, DetailView):
+class ShowProducts(DataMixin, ListView):
     model = Product
-    template_name = 'crm/product_list.html'
+    template_name = 'crm/products_list.html'
     context_object_name = 'products'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -100,8 +101,8 @@ class ShowProducts(DataMixin, DetailView):
         c_def = self.get_user_context(title=context['products'])
         return dict(list(context.items()) + list(c_def.items()))
 
-    def get_queryset(self):
-        return Order.objects.all().order_by('date_created')
+    # def get_queryset(self):
+    #     return Order.objects.all().order_by('date_created')
 
 
 
@@ -136,19 +137,17 @@ class AddOrder(DataMixin,CreateView):
 
 
 
-class ShowOrders(DataMixin, DetailView):
+class ShowOrders(DataMixin, ListView):
     model = Order
-    template_name = 'crm/orders.html'
+    template_name = 'crm/orders_list.html'
     
     context_object_name = 'orders'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title=context['product'])
+        c_def = self.get_user_context(title=context['orders'])
         return dict(list(context.items()) + list(c_def.items()))
     
-    def get_queryset(self):
-        return Order.objects.all().filter('date_created')
 
 
 
@@ -177,20 +176,18 @@ class AddCustomer(DataMixin, CreateView):
 
 
 
-class ShowCustomers(DataMixin, DetailView):
-    template_name = 'crm/customers_listhtml'
+class ShowCustomers(DataMixin, ListView):
+    template_name = 'crm/customers_list.html'
     model = Customer
     context_object_name = 'customers'
-    success_url = reverse_lazy('customer-list')
+    
     
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Create customer')
+        c_def = self.get_user_context(title='customers')
         return dict(list(context.items()) + list(c_def.items()))
 
-    def get_queryset(self):
-        return Customer.objects.all().filter('date_created')
-
+ 
 
 
 class CustomerDetail(DataMixin, DetailView):
