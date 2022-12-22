@@ -4,14 +4,15 @@ venv
 #
 node_modules
 test.txt
-
+*pycache*
+__pycache__
 .env_docker
 docker.env
 postgres_data
 docker.env
 db.env
 .flaskenv
-
+django_proj/crm/__pycache__
 *.log
 *.py[cod]
 *$py.class
