@@ -153,3 +153,5 @@ dmypy.json
 cython_debug/
 data-dev.sqlite
 test.py
+config/__pycache__/*
+crm/__pycache__/*
