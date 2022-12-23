@@ -7,11 +7,8 @@ import useToken from './components/Account/useToken';
 import {Link} from 'react-router-dom';
 
 
-//check jwt token
-const token = localStorage.getItem("token");
-if (token) {
-    setAuthToken(token);
-}
+
+
 
 const App = () => {
  

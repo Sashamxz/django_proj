@@ -1,14 +1,26 @@
 {% extends 'crm/base.html' %}    
     
 {% block content %} 
-    		{% for customer in customers %}
+    		
+
+<table class="table">
+						<tr>
+							<th>Name</th>
+							<th>Phone</th>
+							<th></th>
+						</tr>
+                      
+						
+
+		{% for customer in customers %}
 					<tr>
-						<td><a class="btn btn-info" href={% url 'customer' customer.id %}>View Profile</a></td>
+						
 						<td>{{customer.name}}</td>
 						<td>{{customer.phone}}</td>
+						<td><a class="btn btn-info" href={% url 'customer-detail' customer.id %}>View Profile</a></td>
 					</tr>
-				{% endfor %}
+		{% endfor %}
 
-				
+</table>			
 
 {%endblock%}				

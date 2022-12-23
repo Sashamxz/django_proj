@@ -2,6 +2,8 @@ from django.db.models import Count
 
 from .models import *
 
+
+
 menu = [{'title': 'About', 'url_name': 'about'},
         {'title': 'Add product', 'url_name': 'add_product'},
         {'title': 'Orders', 'url_name' : 'orders' }
