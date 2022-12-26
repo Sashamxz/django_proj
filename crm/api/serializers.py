@@ -4,11 +4,6 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 
-
-
-
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -19,7 +14,6 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         Token.objects.create(user=user)
         return user
-
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -33,16 +27,13 @@ class OrderSerializer(serializers.ModelSerializer):
         return order
 
 
-
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = [ 'name', 'price','category', 'description']
-
-
+        fields = ['name', 'price', 'category', 'description']
 
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ('pk', 'name','phone',  'email', 'description')
+        fields = ('pk', 'name', 'phone', 'email', 'description')

@@ -37,6 +37,23 @@ img.img-article-left.thumb {
     margin-right: 20px;
   }
 
+td {	
+	border: 1px solid rgb(75, 64, 64);
+	text-align: center;
+}
+
+td.content > div > table{
+	border-spacing: 10px;
+	border-collapse: separate;
+	width: 400px;
+	border: 1px solid rgb(40, 36, 36);
+}
+
+
+th{
+	border-spacing: 5px;
+}
+
 p.link-read-post {
 	text-align: right;
 
@@ -49,6 +66,7 @@ p.link-read-post a {
 	color: #fff;
 	text-decoration: none;
 }
+
 
 .card-scard-body {
 	padding: 5px;
@@ -64,6 +82,7 @@ p.link-read-post a {
 	border: 1px solid #000;
 }
 
+
 div.col-md5 td{
 	padding: 5px;
 	border-collapse: collapse;
@@ -77,6 +96,8 @@ div.article-panel {
     overflow: hidden;
     color: #555;
 }
+
+
 div.article-panel p.first {
     margin: 0;
     float: left;
@@ -129,13 +150,19 @@ ul.mainmenu li {
 	float: left;
 	margin: 18px 40px 0 30px;
 }
+
+
 ul.mainmenu li.logo {margin: 0;}
+
+
 ul.mainmenu li.last {float: right;}
+
 
 ul.mainmenu li a {
 	color: #fdc073;
 	text-decoration: none;
 }
+
 ul.mainmenu li a:hover {
 	color: #FDA83D;
 }
@@ -151,10 +178,13 @@ ul.langitem {
 	padding: 0;
 	max-width: 300px
 }
+
+
 ul.langitem li {
 	margin: 10px 0 0 0;
 	width: 100%;
 }
+
 ul.langitem li.image {
 	margin: 0;
 	text-align: center;
@@ -162,19 +192,23 @@ ul.langitem li.image {
 	height: 250px;
 	overflow: hidden;
 }
+
 ul.langitem li.descr {
 	color: #777;
 	height: 170px;
 	overflow: hidden;
 }
+
 ul.langitem li a {
 	color: #fdc073;
 	text-decoration: none;
 	font-size: 20px;
 }
+
 ul.langitem li a:hover {
 	color: #FDA83D;
 }
+
 div.button {
 	background: #3F4137;
 	max-width: 200px;

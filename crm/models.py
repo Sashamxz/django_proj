@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
-
 # Create your models here.
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
@@ -13,12 +11,9 @@ class Customer(models.Model):
     description = models.CharField(max_length=200, null=True,blank=True)
     profile_pic = models.ImageField(default="ekta dd.jpg", null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    
-
+ 
     def __str__(self):
         return self.name
-
-
 
 
 class Tag(models.Model):
@@ -33,7 +28,7 @@ class Product(models.Model):
         ('Indoor', 'Indoor'),
         ('Out Door', 'Out Door'),
     )
-    
+   
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField(null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)

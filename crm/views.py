@@ -1,18 +1,17 @@
 
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, logout
 from django.views.generic import ListView, DetailView, CreateView
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.core.paginator import Paginator
-from .forms import RegisterUserForm, LoginUserForm, AddProductForm, AddOrderForm, AddCustomerForm
+from .forms import RegisterUserForm, LoginUserForm, AddProductForm, \
+    AddOrderForm, AddCustomerForm
 from .models import Product, Order, Customer
 from .utils import DataMixin
 from .filters import OrderFilter
 
 
-#auth views
+# auth views
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
     template_name = 'crm/register.html'
@@ -29,8 +28,6 @@ class RegisterUser(DataMixin, CreateView):
         return redirect('home')
 
 
-
-
 class LoginUser(DataMixin, LoginView):
     form_class = LoginUserForm
     template_name = 'crm/login.html'
@@ -44,38 +41,31 @@ class LoginUser(DataMixin, LoginView):
         return reverse_lazy('home')
 
 
-
 def logout_user(request):
     logout(request)
     return redirect('login')
 
 
-
-
-#common views
+# common views
 class CrmHome(DataMixin, ListView):
     model = Customer
     template_name = 'crm/index.html'
     
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['orders'] = Order.objects.all()
         context['customers'] = Customer.objects.all()
         c_def = self.get_user_context(title="Home page")
         return dict(list(context.items()) + list(c_def.items()))
-   
 
 
 def about(request):
     context = {'name': request.user_name,
-                        'title' : 'About'}
+               'title': 'About'}
     return render(request, 'crm/about.html', context)
 
 
-
-#crm views
-
+# crm views
 class AddProduct(DataMixin, CreateView):
     form_class = AddProductForm
     template_name = 'crm/add_product.html'
@@ -83,12 +73,10 @@ class AddProduct(DataMixin, CreateView):
     login_url = reverse_lazy('home')
     raise_exception = True
  
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Add product')
         return dict(list(context.items()) + list(c_def.items()))
-
 
 
 class ShowProducts(DataMixin, ListView):
@@ -96,6 +84,9 @@ class ShowProducts(DataMixin, ListView):
     template_name = 'crm/products_list.html'
     context_object_name = 'products'
 
+    def get_queryset(self):
+        return Product.objects.all().order_by('-date_created')
+         
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='products')
@@ -105,29 +96,25 @@ class ShowProducts(DataMixin, ListView):
     #     return Order.objects.all().order_by('date_created')
 
 
-
 class ProductDetail(DataMixin, DetailView):
     model = Product
     template_name = 'crm/product_detail.html'
     pk_url_kwarg = 'product_id'
     context_object_name = 'product'
-    
+  
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=context['product'])
         return dict(list(context.items()) + list(c_def.items()))
 
 
-
-class AddOrder(DataMixin,CreateView):
+class AddOrder(DataMixin, CreateView):
     model = Order
     form_class = AddOrderForm
     template_name = 'crm/add_order.html' 
     login_url = reverse_lazy('login')
     success_url = 'home'
     
-
-
     def get_initial(self):
         initial = super(AddOrder, self).get_initial()
         customer_id = self.kwargs['customer']
@@ -135,20 +122,18 @@ class AddOrder(DataMixin,CreateView):
         return initial
 
 
-
-
 class ShowOrders(DataMixin, ListView):
     model = Order
     template_name = 'crm/orders_list.html'
-    
     context_object_name = 'orders'
+
+    def get_queryset(self):
+        return Order.objects.all().order_by('-date_created')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='orders')
         return dict(list(context.items()) + list(c_def.items()))
-    
-
 
 
 class OrderDetail(DataMixin, DetailView):
@@ -163,7 +148,6 @@ class OrderDetail(DataMixin, DetailView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
-
 class AddCustomer(DataMixin, CreateView):
     template_name = 'crm/add_customer.html'
     form_class = AddCustomerForm
@@ -175,19 +159,15 @@ class AddCustomer(DataMixin, CreateView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
-
 class ShowCustomers(DataMixin, ListView):
     template_name = 'crm/customers_list.html'
     model = Customer
     context_object_name = 'customers'
-    
-    
+      
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='customers')
         return dict(list(context.items()) + list(c_def.items()))
-
- 
 
 
 class CustomerDetail(DataMixin, DetailView):
@@ -205,7 +185,7 @@ class CustomerDetail(DataMixin, DetailView):
         orders = myFilter.qs
         total_orders = orders.count()
         context = {'customer': customer, 'orders': orders,
-                'total_orders': total_orders, 'myFilter': myFilter}
+                   'total_orders': total_orders, 'myFilter': myFilter}
 
         return render(request, 'crm/customer_detail.html', context)
 
