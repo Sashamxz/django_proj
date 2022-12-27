@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.contrib.auth import login, authenticate
 from rest_framework import status, generics, serializers
 from rest_framework.views import APIView
@@ -12,7 +11,6 @@ from .serializers import ProductSerializer, UserSerializer, CustomerSerializer
 from crm.models import Product, Customer
 
 
-
 @api_view(['GET'])
 @permission_classes((permissions.AllowAny,))
 def getRoutes(request):
@@ -22,9 +20,6 @@ def getRoutes(request):
         '/api/customers/',
     ]
     return Response(routes)
-
-
-
 
 
 class LoginUserView(APIView):
@@ -41,7 +36,6 @@ class LoginUserView(APIView):
         })
 
 
-
 class UsersListView(APIView):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
@@ -53,7 +47,6 @@ class UsersListView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
 
 
 class ProductsListView(APIView):       
@@ -68,8 +61,6 @@ class ProductsListView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
-
 
     def post(self, request, *args, **kwargs):
         '''
@@ -89,19 +80,15 @@ class ProductsListView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminUser)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
-
-
 class CustomersListView(APIView):
     serializer_class = CustomerSerializer
     queryset = Customer.objects.all()
-
 
     def get(self, request, *args, **kwargs):
         customers = Customer.objects.all()

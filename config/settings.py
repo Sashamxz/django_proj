@@ -17,12 +17,8 @@ from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 load_dotenv()
-BASE_DIR= os.path.join(os.path.dirname(__file__))
-
-
-
-
-
+BASE_DIR = os.path.join(os.path.dirname(__file__))
+ 
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,14 +37,15 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    # add
     'rest_framework_simplejwt',
     'djoser',
     'corsheaders',
-    'rest_framework', 
+    'rest_framework',
     'rest_framework.authtoken', 
     'frontend.apps.FrontendConfig',
     'crm.apps.CrmConfig',
-    
+    # django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
