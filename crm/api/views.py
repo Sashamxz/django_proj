@@ -39,7 +39,7 @@ class LoginUserView(APIView):
 class UsersListView(APIView):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
-    
+
     def get(self, request, *args, **kwargs):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)

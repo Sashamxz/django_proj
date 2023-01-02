@@ -1,22 +1,42 @@
+@import "./reset.css";
+
+
 html, body {
 	font-family: 'Arial';
 	margin: 0;
-	padding: 5px;
+	padding: 0px;
 	height: 100%;
 	width: 100%;
 	color: rgb(215, 212, 212);
 }
 
-a {
-	color: #2a2f34;
-	text-decoration: none;
+
+a:active{
+	color: #0059b2;
+
 }
+
+
 a:hover {
 	color: #ea3838;
 	text-decoration: underline;
 }
 
 img {max-width: 600px; height: auto;}
+
+
+.list-elements{
+	border-spacing: 10px;
+	
+	
+	width: 600px;
+	
+}
+
+.list-elements td{
+	padding: 3px;
+	border-bottom: 1px solid #000;
+}
 
 img.img-article-left {
 	max-width: 300px;
@@ -36,15 +56,6 @@ img.img-article-left.thumb {
     color: #fff;
     margin-right: 20px;
   }
-
-
-td.content > div > table{
-	border-spacing: 10px;
-	border-collapse: collapse;
-	width: 400px;
-	border: 1px solid rgb(40, 36, 36);
-}
-
 
 
 
@@ -86,9 +97,12 @@ ul.list-articles li {
 .clear {clear: both;}
 
 .header {
-	background: #3F4137;
+	background: #171716;
 	height: 60px;
+	border-bottom: 1px solid #000;
 }
+
+td.left-chapters
 
 .logo {
 	background: url('../images/logo.png') no-repeat 10px 5px;
@@ -176,6 +190,8 @@ ul.langitem li a:hover {
 	border-right: 1px solid #ccc;
 	min-height: 100%;
 }
+
+
 .left-chapters ul {
 	width: 230px;
 	min-height: 100%;
@@ -188,8 +204,8 @@ ul.langitem li a:hover {
 	margin: 30px 0 0 0;
 	color: #999;
 }
-.left-chapters ul li.selected {color: #0059b2; }
-.left-chapters ul li a {
+.left-chapters ul li a:active {color: #0059b2; }
+.left-chapters  li a {
 	color: #444;
 	text-decoration: none;
 }

@@ -14,18 +14,16 @@ from dotenv import load_dotenv
 from datetime import timedelta
 
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 load_dotenv()
 BASE_DIR = os.path.join(os.path.dirname(__file__))
- 
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =  os.getenv(
+SECRET_KEY = os.getenv(
     'DJANGO_SECRET_KEY') or 'n9ceqv38)#&mwuat@(mjb_peeem,b nem$e8$qyr#fw9ot!=ba6lijx-6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -52,8 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]    
-
+]
 
 
 # WEBPACK_LOADER = {
@@ -93,14 +90,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissions',
     ],
-     'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        
     ]
 }
-
 
 
 TEMPLATES = [
@@ -127,11 +122,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  os.getenv('DB_NAME'),
-        'USER':  os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST':  os.getenv('DB_HOST')
+        'ENGINE' : 'django.db.backends.postgresql',
+        'NAME' : os.getenv('DB_NAME'),
+        'USER' : os.getenv('DB_USER'),
+        'PASSWORD' : os.getenv('DB_PASSWORD'),
+        'HOST' : os.getenv('DB_HOST')
     }
 }
 
@@ -165,7 +160,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-#react_dir
+# react_dir
 REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend')
 
 # Static files (CSS, JavaScript, Images)
