@@ -1,15 +1,13 @@
-from django.forms import ModelForm
+from django import forms
 from .models import Order
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from .models import Customer, Product
 
 
 
-#name.price.categore.description
-
+# name.price.categore.description
 class AddProductForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -30,9 +28,6 @@ class AddProductForm(forms.ModelForm):
         return name
 
 
-
-
-
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'form-input'}))
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-input'}))
@@ -44,14 +39,9 @@ class RegisterUserForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 
-
-
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Login', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-
-
-
 
 
 class AddCustomerForm(forms.ModelForm):
@@ -63,15 +53,10 @@ class AddCustomerForm(forms.ModelForm):
 
     class Meta:
         model = Customer
-        fields = ['user', 'name' ,'phone', 'email', 'description', 'profile_pic'] 
-       
-
-
-
+        fields = ['user', 'name', 'phone', 'email', 'description', 'profile_pic'] 
+    
 
 class AddOrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['customer', 'product', 'status']
-
-

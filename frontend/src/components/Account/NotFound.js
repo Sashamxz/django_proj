@@ -14,7 +14,7 @@ export default class Login extends Component {
     }
     onChange = (e) => this.setState({ [e.target.name]: e.target.value });
     handleSubmit(event) {
-        axios.post('http://localhost:8000/api/auth/token/',{
+        axios.post('http://localhost:8000/api/authtoken/',{
             username: this.state.email,
             password: this.state.password,
         }).then(function (res){
