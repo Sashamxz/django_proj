@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { logoutUser } from '../actions/userActions';
+//import { logoutUser } from '../actions/userActions';
 
 
 const Navbar = ({ currentUser, logoutUser }) => { 

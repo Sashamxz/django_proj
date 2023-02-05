@@ -1,7 +1,7 @@
 
 import React from 'react';
 import axios from 'axios';
-import deleteProduct from '../actions/product'
+import deleteProduct from '../../actions/product'
 
 
 

@@ -1,5 +1,6 @@
 
 module.exports = {
+    
     module: {
       rules: [
         {
@@ -15,7 +16,11 @@ module.exports = {
           use: {
             loader: "babel-loader"
           }
-        }
+        },
+        
       ]
+    },
+    performance: {
+      hints: false,
     }
   };

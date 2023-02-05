@@ -2,23 +2,36 @@ from rest_framework import serializers
 from crm.models import Order, Product, Customer
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+
+    @classmethod
+    def get_token(cls, user):
+        token = super(MyTokenObtainPairSerializer, cls).get_token(user)
+
+        # Add 
+        token["username"] = user.username
+        token["first_name"] = user.first_name
+        return token
 
 
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','username','password','first_name', 'last_name')
+        fields = ('id','username','password', 'email' )
         extra_kwargs = {
-            'password': { 'write_only': True },
+            'password':{'write_only': True},
         }
-    
-    def create(self, validated_data):
-        user = User.objects.create_user(validated_data['username'], password = validated_data['password'],
-         first_name=validated_data['first_name'], last_name=validated_data['last_name'])
-        return user
 
+    def create(self, validated_data):
+        user = User.objects.create_user(validated_data['username'], password = validated_data['password'], 
+                                         email = validated_data['email'])
+        return user
 
 
 
@@ -28,10 +41,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'email', 'password')
         extra_kwargs = {'password': {'write_only': True, 'required': True}}
 
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        Token.objects.create(user=user)
-        return user
+   
 
 
 class OrderSerializer(serializers.ModelSerializer):
