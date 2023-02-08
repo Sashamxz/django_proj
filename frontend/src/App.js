@@ -9,14 +9,17 @@ import Register from "./components/Account/Register";
 // Component Imports
 import Navbar from "./components/Panel/Navbar";
 import Footer from "./components/Panel/Footer";
+import Sidebar from "./components/Panel/Sidebar";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   return (
+    
     <div>
       <Navbar />
+      <Sidebar />
       <Routes>
         <Route
           path="/"

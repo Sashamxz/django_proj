@@ -1,0 +1,17 @@
+
+
+  
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  
+  min-height: 100%;
+}
+
+.sidebar button  {
+  background-color: beige;
+  color: "black";
+  border: "1px solid black";
+  padding: "15px 32px";
+  margin: "5px 0px";
+}

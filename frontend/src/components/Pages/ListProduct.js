@@ -1,6 +1,7 @@
 
 import React from 'react';
 import axios from 'axios';
+import "./ListProduct.css"
 import deleteProduct from '../../actions/product'
 
 
@@ -34,7 +35,7 @@ export  class ListProduct extends React.Component {
               <th>Price</th>
               <th>Category</th>
               <th>Description</th>
-              <th></th>
+              
               
            </tr>
          </thead>
