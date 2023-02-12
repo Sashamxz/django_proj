@@ -6,14 +6,13 @@ import './Sidebar.css';
 
 
 const Sidebar = () => {
-  return (
-      <div className='sidebar'>
-          <h3>Sidebar</h3>
+  return ( <div className="sidebar">
+            <div class="btn-group">
           
             <button onClick={() => navigateTo('products')}>Products</button> 
             <button onClick={() => navigateTo('customers')}>Customers</button>
             <button onClick={() => navigateTo('orders')}>Orders</button>
-          
+          </div>
       </div>
   );
 }

@@ -26,7 +26,7 @@ export  class ListProduct extends React.Component {
 
   render() {
  
-    return ( <div className="list_products">
+    return ( <div className="list_products" style={{ zIndex: 10 }}>
         <h1>Products:</h1>
          <table className="table table-striped">
            <thead>
