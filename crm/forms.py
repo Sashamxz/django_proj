@@ -6,12 +6,11 @@ from django.core.exceptions import ValidationError
 from .models import Customer, Product
 
 
-
 # name.price.categore.description
 class AddProductForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-    
+
     name = forms.CharField(max_length=200, label=('Enter name')),
     price = forms.CharField(widget=forms.NumberInput),    
     description = forms.CharField(max_length=200, label=('Description'))       
@@ -19,7 +18,7 @@ class AddProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'category', 'description']
-       
+
     def clean_name(self):
         name = self.cleaned_data['name']
         if len(name) > 30:
@@ -54,7 +53,7 @@ class AddCustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ['user', 'name', 'phone', 'email', 'description', 'profile_pic'] 
-    
+
 
 class AddOrderForm(forms.ModelForm):
     class Meta:

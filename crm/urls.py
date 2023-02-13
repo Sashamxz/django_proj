@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import CrmHome,  LoginUser,  RegisterUser, AddProduct, CustomerDetail, AddCustomer, \
-        AddOrder, ShowCustomers, ShowProducts, ProductDetail, ShowOrders, OrderDetail, about, logout_user
+from .views import CrmHome, LoginUser, RegisterUser, AddProduct, CustomerDetail, AddCustomer, \
+    AddOrder, ShowCustomers, ShowProducts, ProductDetail, ShowOrders, OrderDetail, about, logout_user
 
 
 urlpatterns = [
