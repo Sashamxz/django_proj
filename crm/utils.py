@@ -3,8 +3,7 @@ from .models import *
 
 menu = [{'title': 'About', 'url_name': 'about'},
         {'title': 'Add product', 'url_name': 'add_product'},
-        {'title': 'Orders', 'url_name' : 'orders' }
-]
+        {'title': 'Orders', 'url_name' : 'orders'}]
 
 
 class DataMixin:

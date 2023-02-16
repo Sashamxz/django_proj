@@ -5,15 +5,12 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from django.contrib.auth.models import User
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny, IsAuthenticated, BasePermission, SAFE_METHODS, IsAdminUser, \
-                                        DjangoObjectPermissions
-from .serializers import ProductSerializer, UserSerializer, CustomerSerializer, RegisterSerializer, \
-                         MyTokenObtainPairSerializer   
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from .serializers import ProductSerializer, UserSerializer, CustomerSerializer, \
+    RegisterSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 from crm.models import Product, Customer
-
-
 
 
 @api_view(['GET'])
@@ -27,7 +24,6 @@ def getRoutes(request):
     return Response(routes)
 
 
-
 class ObtainTokenPairWithColorView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
@@ -35,9 +31,9 @@ class ObtainTokenPairWithColorView(TokenObtainPairView):
 class RegisterApi(generics.GenericAPIView):
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
-    
-    def post(self, request, *args,  **kwargs):
-        serializer =  RegisterSerializer(data=request.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
             if user:
@@ -46,14 +42,12 @@ class RegisterApi(generics.GenericAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
 class LoginUserView(APIView):
     permission_classes = (AllowAny,)
     serializer_class = UserSerializer
 
     def post(self, request):
-        user = authenticate(request, username=request.data.get("username"), 
+        user = authenticate(request, username=request.data.get("username"),
                             password=request.data.get("password"))
         if user is not None:
             login(request, user)
@@ -86,13 +80,13 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
             token = RefreshToken(refresh_token)
             token.blacklist()
             return Response(status=status.HTTP_205_RESET_CONTENT)
-        except Exception as e:
+
+        except Exception :
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-
-class ProductsListView(APIView):       
-    serializer_class = ProductSerializer         
+class ProductsListView(APIView):
+    serializer_class = ProductSerializer
     permission_classes = (AllowAny,)
     queryset = Product.objects.all()
 
@@ -106,11 +100,11 @@ class ProductsListView(APIView):
 
     def post(self, request, *args, **kwargs):
         '''
-        Create the Product with given todo data
+        Create the Product
         '''
         data = {
-            'name': request.data.get('name'), 
-            'price': request.data.get('price'), 
+            'name': request.data.get('name'),
+            'price': request.data.get('price'),
             'category': request.data.get('category'),
             'description' : request.data.get('description')
         }
@@ -122,12 +116,10 @@ class ProductsListView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminUser)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-
 
 
 class CustomersListView(APIView):

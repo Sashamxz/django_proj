@@ -17,4 +17,4 @@ urlpatterns = [
     path('users/', views.UsersListView.as_view(), name='users'),
     path('products/', views.ProductsListView.as_view(), name='products'),
     path('customers/', views.CustomersListView.as_view(), name='customers')
-    ]
+]

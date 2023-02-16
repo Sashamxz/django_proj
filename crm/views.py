@@ -92,9 +92,6 @@ class ShowProducts(DataMixin, ListView):
         c_def = self.get_user_context(title='products')
         return dict(list(context.items()) + list(c_def.items()))
 
-    # def get_queryset(self):
-    #     return Order.objects.all().order_by('date_created')
-
 
 class ProductDetail(DataMixin, DetailView):
     model = Product
@@ -114,7 +111,7 @@ class AddOrder(DataMixin, CreateView):
     template_name = 'crm/add_order.html' 
     login_url = reverse_lazy('login')
     success_url = 'home'
-    
+
     def get_initial(self):
         initial = super(AddOrder, self).get_initial()
         customer_id = self.kwargs['customer']
@@ -188,5 +185,3 @@ class CustomerDetail(DataMixin, DetailView):
                    'total_orders': total_orders, 'myFilter': myFilter}
 
         return render(request, 'crm/customer_detail.html', context)
-
-

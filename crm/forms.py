@@ -12,8 +12,8 @@ class AddProductForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
     name = forms.CharField(max_length=200, label=('Enter name')),
-    price = forms.CharField(widget=forms.NumberInput),    
-    description = forms.CharField(max_length=200, label=('Description'))       
+    price = forms.CharField(widget=forms.NumberInput),
+    description = forms.CharField(max_length=200, label=('Description'))
 
     class Meta:
         model = Product
@@ -44,18 +44,17 @@ class LoginUserForm(AuthenticationForm):
 
 
 class AddCustomerForm(forms.ModelForm):
-	
     name = forms.CharField(max_length=200, label=('Enter name')),
-    phone = forms.CharField(widget=forms.NumberInput),  
-    email = forms.EmailField( max_length=200, label=('Enter email address')),   
-    description = forms.CharField(max_length=200, label=('Description'))    
+    phone = forms.CharField(widget=forms.NumberInput),
+    email = forms.EmailField(max_length=200, label=('Enter email address')),
+    description = forms.CharField(max_length=200, label=('Description'))
 
     class Meta:
         model = Customer
-        fields = ['user', 'name', 'phone', 'email', 'description', 'profile_pic'] 
+        fields = ['name', 'phone', 'email', 'description', 'profile_pic']
 
 
 class AddOrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['customer', 'product', 'status']
+        fields = ['customer', 'product', 'status', 'urgency']

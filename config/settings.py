@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'djoser',
     'corsheaders',
     'rest_framework',
-    'rest_framework.authtoken', 
+    'rest_framework.authtoken',
     'frontend.apps.FrontendConfig',
     'crm.apps.CrmConfig',
     # django
@@ -92,7 +92,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        #'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
     ]
 }
 
@@ -122,8 +122,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-}
+        'NAME' : './db.sqlite3',
+    }
 }
 
 # Password validation
@@ -169,7 +169,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SIMPLE_JWT ={
+SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ALGORITHM': 'HS256',
