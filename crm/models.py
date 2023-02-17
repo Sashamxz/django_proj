@@ -6,7 +6,7 @@ class Category(models.Model):
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'Category {self.name}'
+        return f'{self.name}'
 
 
 class Customer(models.Model):

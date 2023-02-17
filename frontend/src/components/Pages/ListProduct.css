@@ -49,3 +49,11 @@ th {
     background-color: #4CAF50;
     color: white;
 }
+
+td {
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+}

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'djoser',
     'corsheaders',
     # app
+    'account.apps.AccountsConfig'
     'crm.apps.CrmConfig',
     'frontend.apps.FrontendConfig',
 
