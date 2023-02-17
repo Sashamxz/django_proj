@@ -13,7 +13,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Add
         token["username"] = user.username
-        token["first_name"] = user.first_name
         return token
 
 
@@ -26,7 +25,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        user = User.objects.create_user(validated_data['username'], 
+        user = User.objects.create_user(validated_data['username'],
                                         password=validated_data['password'],
                                         email=validated_data['email'])
         return user

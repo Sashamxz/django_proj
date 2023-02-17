@@ -50,7 +50,7 @@ def logout_user(request):
 class CrmHome(DataMixin, ListView):
     model = Customer
     template_name = 'crm/index.html'
-    
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['orders'] = Order.objects.all()
@@ -72,7 +72,7 @@ class AddProduct(DataMixin, CreateView):
     success_url = reverse_lazy('home')
     login_url = reverse_lazy('home')
     raise_exception = True
- 
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Add product')
@@ -86,7 +86,7 @@ class ShowProducts(DataMixin, ListView):
 
     def get_queryset(self):
         return Product.objects.all().order_by('-date_created')
-         
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='products')
@@ -98,7 +98,7 @@ class ProductDetail(DataMixin, DetailView):
     template_name = 'crm/product_detail.html'
     pk_url_kwarg = 'product_id'
     context_object_name = 'product'
-  
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=context['product'])
@@ -108,7 +108,7 @@ class ProductDetail(DataMixin, DetailView):
 class AddOrder(DataMixin, CreateView):
     model = Order
     form_class = AddOrderForm
-    template_name = 'crm/add_order.html' 
+    template_name = 'crm/add_order.html'
     login_url = reverse_lazy('login')
     success_url = 'home'
 
@@ -138,7 +138,7 @@ class OrderDetail(DataMixin, DetailView):
     template_name = 'crm/oreder_detail.html'
     pk_url_kwarg = 'order_id'
     context_object_name = 'order'
-    
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=context['order'])
@@ -149,7 +149,7 @@ class AddCustomer(DataMixin, CreateView):
     template_name = 'crm/add_customer.html'
     form_class = AddCustomerForm
     success_url = reverse_lazy('customers-list')
-    
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Create customer')
@@ -160,7 +160,7 @@ class ShowCustomers(DataMixin, ListView):
     template_name = 'crm/customers_list.html'
     model = Customer
     context_object_name = 'customers'
-      
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Customers')
@@ -172,7 +172,7 @@ class CustomerDetail(DataMixin, DetailView):
     template_name = 'crm/customer_detail.html'
     pk_url_kwarg = 'customer_id'
     context_object_name = 'customer'
-    
+
     def get(self, request, pk, *args, **kwargs):
         customer = Customer.objects.get(id=pk)
         orders = customer.order_set.all()

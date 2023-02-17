@@ -1,5 +1,3 @@
-from .models import *
-
 
 menu = [{'title': 'About', 'url_name': 'about'},
         {'title': 'Add product', 'url_name': 'add_product'},

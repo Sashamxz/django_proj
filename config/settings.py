@@ -36,13 +36,16 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     # add
-    'rest_framework_simplejwt',
     'djoser',
     'corsheaders',
+    # app
+    'crm.apps.CrmConfig',
+    'frontend.apps.FrontendConfig',
+
+    'rest_framework_simplejwt',
     'rest_framework',
     'rest_framework.authtoken',
-    'frontend.apps.FrontendConfig',
-    'crm.apps.CrmConfig',
+    'rest_framework_simplejwt.token_blacklist',
     # django
     'django.contrib.admin',
     'django.contrib.auth',
@@ -121,8 +124,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE' : 'django.db.backends.sqlite3',
-        'NAME' : './db.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'SQLite3.db',
     }
 }
 
