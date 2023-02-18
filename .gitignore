@@ -158,3 +158,5 @@ __pycache__
 __pycache__*
 config/__pycache__/*
 crm/__pycache__/*
+*__pycache__*
+*pycache*

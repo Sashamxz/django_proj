@@ -39,10 +39,9 @@ INSTALLED_APPS = [
     'djoser',
     'corsheaders',
     # app
-    'account.apps.AccountsConfig'
+    'accounts.apps.AccountsConfig',
     'crm.apps.CrmConfig',
     'frontend.apps.FrontendConfig',
-
     'rest_framework_simplejwt',
     'rest_framework',
     'rest_framework.authtoken',

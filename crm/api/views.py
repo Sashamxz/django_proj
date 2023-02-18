@@ -46,59 +46,6 @@ class CategoryesApiView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # class ProductsListView(generics.ListCreateAPIView):
 #     serializer_class = ProductSerializer
 #     permission_classes = (AllowAny,)
@@ -128,10 +75,6 @@ class CategoryesApiView(generics.ListAPIView):
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-
 
 # class ProductDetailView(APIView):
 #     permission_classes = (IsAdminUser)

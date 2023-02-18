@@ -11,7 +11,6 @@ router.register(r'products', ProductViewSet)
 
 urlpatterns = [
     path('', getRoutes),
-    path('categoryes/' , CategoryesApiView),
+    path('categoryes/' , CategoryesApiView.as_view()),
     path('api/', include((router.urls, 'crm'))),
 ]
-    
