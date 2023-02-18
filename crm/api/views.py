@@ -1,10 +1,10 @@
-from rest_framework import  generics
+from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions, viewsets
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import OrderSerializer, CustomerSerializer, ProductSerializer, CategorySerializer
-             
+
 
 from crm.models import Product, Customer, Order, Category
 
@@ -25,7 +25,7 @@ def getRoutes(request):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
 
 class CustomerViewSet(viewsets.ModelViewSet):
