@@ -1,3 +1,42 @@
-.error {
-    color: red;
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
   }
+  
+  .login-form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .login-form input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  
+  .login-form button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-form button:hover {
+    background-color: #3e8e41;
+  }
+  
+  .login-form .error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  

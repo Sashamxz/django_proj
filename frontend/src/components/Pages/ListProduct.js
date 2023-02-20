@@ -17,7 +17,7 @@ export  class ListProduct extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://127.0.0.1:8000/api/products')
+    axios.get('http://127.0.0.1:8000/api/v1/products/')
       .then(res => {
         const products = res.data;
         this.setState({ products });

@@ -94,5 +94,3 @@ class CategoryesApiView(generics.ListAPIView):
 #         else:
 #             return Response(status=status.HTTP_404_NOT_FOUND)
 
-
-

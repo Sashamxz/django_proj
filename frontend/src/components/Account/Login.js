@@ -1,51 +1,42 @@
-import React, { useContext, useEffect } from "react";
-import AuthContext from "../../context/AuthContext";
-import useCustomForm from "../../hooks/useCustomForm";
-import { Link } from "react-router-dom";
-import "./Login.css";
+import React, { useState } from "react";
+import axios from "axios";
 
-const Login = () => {
-  const { loginUser, isServerError } = useContext(AuthContext);
-  const defaultValues = { username: "", password: "" };
-  const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
-    defaultValues,
-    loginUser
-  );
+const Login = ({ onLogin }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+ 
 
-  useEffect(() => {
-    if (isServerError) {
-      reset();
-    }
-    
-  }, [isServerError]);
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    axios.post("/api/accounnt/token", { username, password })
+      .then(response => {
+        localStorage.setItem("access_token", response.data.access);
+        localStorage.setItem("refresh_token", response.data.refresh);
+        onLogin();
+        history.push("/");
+      })
+      .catch(error => {
+        setError("Invalid username or password.");
+      });
+  };
 
   return (
-    <div className="container">
-      <form className="form" onSubmit={handleSubmit}>
-        <label>
-          Username:{" "}
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Password:{" "}
-          <input
-            type="text"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-        </label>
-        {isServerError ? (
-          <p className="error">Login failed, incorrect credentials!</p>
-        ) : null}
-        <Link to="/register">Click to register!</Link>
-        <button>Login!</button>
-      </form>
+    <div className="login-form">
+    <form onSubmit={handleSubmit}>
+      <h2>Login</h2>
+      {error && <div>{error}</div>}
+      <div>
+        <label>Username:</label>
+        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+      </div>
+      <div>
+        <label>Password:</label>
+        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+      </div>
+      <button type="submit">Login</button>
+    </form>
     </div>
   );
 };

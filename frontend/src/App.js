@@ -1,37 +1,46 @@
-import { Routes, Route } from "react-router-dom";
-import "./App.css";
+// App.js
 
-// Pages Imports
+import React, { useState, useEffect } from "react";
 import ListProduct from "./components/Pages/ListProduct";
 import Login from "./components/Account/Login" ;
 import Register from "./components/Account/Register";
+import { getToken, removeToken } from './actions/auth';
 
-// Component Imports
+
 import Navbar from "./components/Panel/Navbar";
 import Footer from "./components/Panel/Footer";
 import Sidebar from "./components/Panel/Sidebar";
 
-// Util Imports
-import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = getToken();
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
+
+  function handleLogout() {
+    removeToken();
+    setLoggedIn(false);
+  }
+
   return (
-    
-    <div>
-      <Navbar />
+    <div className="App">
+      <Navbar loggedIn={loggedIn} handleLogout={handleLogout} />
+   
+      {loggedIn ? (
+        <button onClick={handleLogout}>Logout</button>
+      ) : (
+        <>
+          <Login setLoggedIn={setLoggedIn} />
+          <Register />
+        </>
+      )}
       <Sidebar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <ListProduct />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <ListProduct />
       <Footer />
     </div>
   );
