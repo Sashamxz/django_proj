@@ -1,0 +1,79 @@
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    width: 100%;
+  }
+  
+.registerForm h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+.registerForm form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+.registerForm label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+.registerForm input {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+  
+.registerForm button[type="submit"] {
+    background-color: #0077ff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    border: none;
+    cursor: pointer;
+  }
+  
+.registerForm button[type="submit"]:hover {
+    background-color: #005ae6;
+  }
+  
+.registerForm div:last-of-type {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+  }
+  
+.registerForm div:last-of-type button {
+    background-color: transparent;
+    color: #0077ff;
+    border: none;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+.registerForm div:last-of-type button:hover {
+    text-decoration: underline;
+  }
+  
+  
+.registerForm input[type="text"],
+.registerForm input[type="password"],
+.registerForm input[type="email"] {
+    display: block;
+    width: 280px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 16px;
+  }  
