@@ -1,8 +1,8 @@
 
 import React from 'react';
 import axios from 'axios';
-import "./ListProduct.css"
-import deleteProduct from '../../actions/product'
+import "./ListProducts.css"
+
 
 
 

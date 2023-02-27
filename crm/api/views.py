@@ -17,7 +17,7 @@ def getRoutes(request):
         '/api/products/',
         '/api/customers/',
         '/api/orders/',
-        '/api/cutegoryes/'
+        '/api/cutegories/'
     ]
     return Response(routes)
 
@@ -31,13 +31,13 @@ class ProductViewSet(viewsets.ModelViewSet):
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
 
 
-class OreserViewSet(viewsets.ModelViewSet):
+class OrederViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
 
 
 class CategoryesApiView(generics.ListAPIView):

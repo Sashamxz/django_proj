@@ -2,10 +2,10 @@
 
 
 
-.list-products { 
+.list_orders { 
     display: flex; 
   
-    background-color: #f1f1f1; 
+    background-color: #ffffff; 
     padding: 10px;
     border-radius: 5px; 
 
@@ -17,7 +17,7 @@
     
 }
   
-#app > div > div.list_products{
+#app > div > div.list_orders{
     z-index: 10;
     margin-left: 220px;
 }

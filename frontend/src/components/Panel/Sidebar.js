@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
 
-
-
-
 const Sidebar = () => {
-  return ( <div className="sidebar">
-            <div class="btn-group">
-          
-            <button onClick={() => navigateTo('products')}>Products</button> 
-            <button onClick={() => navigateTo('customers')}>Customers</button>
-            <button onClick={() => navigateTo('orders')}>Orders</button>
-          </div>
+  return (
+    <div className="sidebar">
+      <div className="btn-group">
+        <Link to="/products">Products</Link>
+        <Link to="/customers">Customers</Link>
+        <Link to="/orders">Orders</Link>
       </div>
+    </div>
   );
 }
 
