@@ -9,11 +9,8 @@ To get started with Django CRM System, follow these steps:
 
 4)Create the database: python manage.py migrate
 
-
 5)Create a superuser: python manage.py createsuperuser
-
 
 6)Start the development server: python manage.py runserver
  
-
 7)You can now access the application at http://localhost:8000/ and log in with your superuser account.
